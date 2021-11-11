@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+       
+    </header>
+    <div class="container text-center" id="contadores" style="font-size: 20px;">
+        <section id="seccion_cafe">
+            <article id="article_bebidas">
+                <span>
+                    Cafetería Cubic World
+                </span>
+                    <h3>Menú de Bebidas</h3>
+                    <div class="row">
+                        <div class="container-fluid">
+                            <input type="search" v-model="nom" placeholder="Buscar Bebida por Nombre" style="width: 280px;" @click="mostrar=!mostrar">
+                            <ul class="list-unstyled text-center">
+                                <li v-for="item in buscarBebida" >
+                                <p>{{item.bebida}} - ${{item.precio}}</p>
+                            </li>
+                            </ul>
+                            <transition name="bounce">
+                                <p v-if="mostrar"><img src="img/100.jpg" style="width: 30%;"></p>
+                            </transition>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="container-fluid">
+                            <input type="search" v-model="precio" placeholder="Buscar Bebida por Precio" style="width: 250px;" @click="mostrar2=!mostrar2">
+                            <ul class="list-unstyled text-center">
+                                <li v-for="item in preciosBebidas" >
+                                    <p>{{item.vig}} - {{item.bebida}} - {{item.ing}} - {{item.tam}} - ${{item.precio}}</p>
+                                </li>
+                            </ul>
+                            <transition name="slide-fade">
+                                <p v-if="mostrar2">
+                                <img src="img/bar.jpg" style="width: 30%;">
+                                </p>
+                            </transition>
+                        </div>
+                    </div>
+            </article>
+            <hr>
+            <article id="article_pedido">
+              
+                <table class="table table-striped">
+                    <tr>
+                        <th></th>
+                        <th>Cantidad</th>
+                        <th></th>
+                        <th>Bebida</th>
+                        <th>Precio</th>
+                        <th>Costo Total/Articulo</th>
+                    </tr>
+                    <tr v-for="item in articulos">
+                        <td><button @click="item.cant++">+</button></td>
+                        <td><input type="number" v-model="item.cant"></td>
+                        <td><button :disabled="item.cant == 0" @click="item.cant--">-</button></td>
+                        <td><input type="text" v-model="item.nombre"></td>
+                        <td>$<input type="number" v-model="item.precio_unit" disabled></td>
+                        <td>${{calculoPrecioItems(item)}}</td>
+                    </tr>
+                </table>
+                
+            </article>
+        </section>
+    </div>
+    <br><br>
+    <script src="js/vue.js"></script>
+    <script src="js/vj.js"></script>
+
+</body>
+</html>
